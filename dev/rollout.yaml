@@ -23,7 +23,7 @@ spec:
       containers:
       - name: app
 
-        image: ghcr.io/abhinav211/gitops-demo:01d64c91a4d92ac2e145ff84c8bd076249728c89
+        image: ghcr.io/abhinav211/gitops-demo:b7f20e3aa60bade8600d6ff714d37a92589a8cd3
 
         ports:
         - containerPort: 8080
