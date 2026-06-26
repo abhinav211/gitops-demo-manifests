@@ -30,16 +30,33 @@ spec:
 
         env:
         - name: ENVIRONMENT
-          value: DEV
+          value: PROD
 
         - name: VERSION
           value: "1.0.0"
 
         - name: STRATEGY
-          value: BLUE-GREEN
+          value: CANARY
 
   strategy:
-    blueGreen:
-      activeService: gitops-demo-active
-      previewService: gitops-demo-preview
-      autoPromotionEnabled: false
+    canary:
+      stableService: gitops-demo-stable
+      canaryService: gitops-demo-canary
+	  
+	  
+	  trafficRouting:
+      traefik:
+        weightedTraefikServiceName: gitops-demo-weighted
+
+
+      trafficRouting:
+        traefik: {}
+
+      steps:
+      - setWeight: 20
+      - pause: {}
+
+      - setWeight: 50
+      - pause: {}
+
+      - setWeight: 100

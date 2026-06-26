@@ -3,5 +3,7 @@ kind: Kustomization
 
 resources:
 - rollout.yaml
-- active-service.yaml
-- preview-service.yaml
+- stable-service.yaml
+- canary-service.yaml
+- traefik-service.yaml
+- ingressroute.yaml
