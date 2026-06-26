@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: gitops-demo
+  namespace: stage
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: gitops-demo
+
+  template:
+    metadata:
+      labels:
+        app: gitops-demo
+
+    spec:
+      imagePullSecrets:
+      - name: ghcr-secret
+
+      containers:
+      - name: app
+
+        image: ghcr.io/abhinav211/gitops-demo:v1.0.0
+
+        ports:
+        - containerPort: 8080
+
+        env:
+        - name: ENVIRONMENT
+          value: DEV
+
+        - name: VERSION
+          value: "1.0.0"
+
+        - name: STRATEGY
+          value: BLUE-GREEN
+
+  strategy:
+    blueGreen:
+      activeService: gitops-demo-active
+      previewService: gitops-demo-preview
+      autoPromotionEnabled: false

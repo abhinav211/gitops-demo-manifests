@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops-demo-prod
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/abhinav211/gitops-demo-manifests.git
+    targetRevision: HEAD
+    path: prod
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
