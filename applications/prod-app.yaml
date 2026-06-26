@@ -17,6 +17,17 @@ spec:
     namespace: prod
 
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - Validate=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
     automated:
-      prune: true
       selfHeal: true
+      prune: true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
