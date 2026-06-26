@@ -45,11 +45,7 @@ spec:
 
       trafficRouting:
         traefik:
-          weightedServices:               # ✅ Single correct config
-          - serviceName: gitops-demo-stable
-            weight: 80
-          - serviceName: gitops-demo-canary
-            weight: 20
+          weightedTraefikServiceName: gitops-demo-weighted   # ✅ Required field!
 
       steps:
       - setWeight: 20
