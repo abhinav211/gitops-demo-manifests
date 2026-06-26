@@ -42,15 +42,14 @@ spec:
     canary:
       stableService: gitops-demo-stable
       canaryService: gitops-demo-canary
-	  
-	  
-	  trafficRouting:
-      traefik:
-        weightedTraefikServiceName: gitops-demo-weighted
-
 
       trafficRouting:
-        traefik: {}
+        traefik:
+          weightedServices:               # ✅ Single correct config
+          - serviceName: gitops-demo-stable
+            weight: 80
+          - serviceName: gitops-demo-canary
+            weight: 20
 
       steps:
       - setWeight: 20
