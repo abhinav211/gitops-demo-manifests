@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: gitops-demo
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/abhinav211/gitops-demo:v1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ENVIRONMENT
+              value: PROD
+            - name: VERSION
+              value: "1.0.0"
+            - name: STRATEGY
+              value: CANARY
+
+  strategy:
+    canary:
+      stableService: gitops-demo-stable
+      canaryService: gitops-demo-canary
+      trafficRouting:
+        traefik:
+          weightedTraefikServiceName: gitops-demo-weighted
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 30s
+        - setWeight: 50
+        - pause:
+            duration: 30s
+        - setWeight: 100
