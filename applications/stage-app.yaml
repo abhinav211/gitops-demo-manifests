@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/abhinav211/gitops-demo-manifests.git
     targetRevision: HEAD
-    path: stage
+    path: overlays/stage
 
   destination:
     server: https://kubernetes.default.svc
