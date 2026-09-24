@@ -15,4 +15,4 @@ patches:
 
 images:
   - name: ghcr.io/abhinav211/gitops-demo
-    newTag: 9301cd71f16a4bb562068737a5889b9fc3c2a39c
+    newTag: 0856d73e4b94fd2165d6210bfbb43b373b58d094
