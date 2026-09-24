@@ -28,9 +28,7 @@ spec:
           weightedTraefikServiceName: gitops-demo-weighted
       steps:
         - setWeight: 20
-        - pause:
-            duration: 30s
+        - pause: {}
         - setWeight: 50
-        - pause:
-            duration: 30s
+        - pause: {}
         - setWeight: 100
